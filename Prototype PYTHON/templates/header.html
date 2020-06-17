@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="header">
+    <div class="row">
+      <div class="col-sm">
+        <span class="name">bite</span>
+        <span class="sub">Fine dining</span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+          {% if session['user_first_name'] %}
+          <p>Hello,{% print session['user_first_name'] %}</p>
+          <a href="Vges exw"> Log Out</a>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endblock %}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    {% extends "layout.html" %} {% block content %}
+    <script>
+        $(document).ready(function () {
+            editHour = function (id, hour_from, hour_to) {
+                $("#hour_id").val(id);
+                $("#hour_from").val(hour_from);
+                $("#hour_to").val(hour_to);
+            }
+            createHour = function () {
+                $("#hour_id").val("");
+                $("#hour_from").val("");
+                $("#hour_to").val("");
+            }
+        }
+        );
+    </script>
+    <div class="container page">
+        <div class="Login">
+            <h2>Ώρες λειτουργίας</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Ώρα από</th>
+                    <th scope="col">Ώρα έως</th>
+                    <th scope="col">Ενέργεια</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                {% for record in data %}
+                <tr>
+                    <td>{{ record.Id }}</td>
+                    <td>{{ record.hour_from }}</td>
+                    <td>{{ record.hour_to }}</td>
+                    <td>
+                        <input type='button' class='btn btn-secondary btn-sm'
+                            onclick='editHour("{{record.Id}}","{{record.hour_from}}","{{record.hour_to}}")'
+                            value='Επεξεργασία'>
+                        <a href="{{ url_for('open_hours_delete',date_id= form.date_id.value, hour_id = record.id) }}"
+                            class="btn btn-danger btn-sm">Διαγραφή</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                {% endif %}<tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="button" value="Εισαγωγή" onclick='createHour()' class="btn btn-primary btn-sm">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>{{title}}</h4>
+        <form action="/open_hours" method="POST">
+            <div class="message">
+                {{ message }}
+            </div>
+            <div class="form-group">
+                <label for="hour_id">Id</label>
+                <span class="error">*
+                    {% if form.hour_id.errors %}
+                    {% for error in form.hour_id.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="text" name="hour_id" class="form-control" id="hour_id" readonly>
+            </div>
+            <div class="form-group">
+                <label for="hour_from">Ώρα από</label>
+                <span class="error">*
+                    {% if form.hour_from.errors %}
+                    {% for error in form.hour_from.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="text" name="hour_from" class="form-control" id="hour_from">
+            </div>
+
+            <div class="form-group">
+                <label for="hour_to">Ώρα έως</label>
+                <span class="error">*
+                    {% if form.hour_to.errors %}
+                    {% for error in form.hour_to.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="text" name="hour_to" class="form-control" id="hour_to">
+            </div>
+            <input type="text" hidden name="date_id" class="form-control" id="date_id" readonly
+                value={{form.date_id.value}}>
+            <button type="submit" class="btn btn-primary">Υποβολή</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

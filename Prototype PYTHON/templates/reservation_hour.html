@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  {% extends "layout.html" %} {% block content %}
+  <div class="container page">
+    <div>
+      <h2>Κράτηση</h2>
+    </div>
+    <div class="row justify-content-md-center" style="margin-bottom:20px; margin-top: 20px; ">
+      <div class="col col-2">
+        <img src="../static/images/clock-regular.svg" />
+      </div>
+    </div>
+    <form method="post" action="/reservation_hour">
+      <div class="message">
+        {{ message }}
+      </div>
+      <input type='hidden' name='imerominia' value="{{ form.imerominia.value }}">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Hour from</th>
+            <th scope="col">Hour to</th>
+            <th scope="col">Επιλογή</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if data %}
+          {% for record in data %}
+          <tr>
+            <td>{{ record.hour_from }}</td>
+            <td>{{ record.hour_to }}</td>
+            <td><input type="radio" id="reservation" name="reservation" value="{{ record.hour_from }}"></td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      <div>
+        <button type="submit" class="btn btn-primary">Συνέχεια</button> <br />
+      </div>
+    </form>
+  </div>
+  {% endblock %}
+</body>
+
+</html>

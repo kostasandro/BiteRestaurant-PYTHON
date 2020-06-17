@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+      <div class="Login">
+        <h2>Διαχείριση τραπεζιών κράτησης</h2>
+      </div>
+      <form method="post" action="/reservation_tables">
+      <div class="message">
+        {{ message }}
+      </div>
+      <input type='hidden' name='reservation_id' value="{{ form.reservation_id.value }}">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Table Number</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if data %} 
+            {% for record in data %} 
+                <tr>
+                    <td>{{ record.Table_ID }}</td>
+                    <td>{{ record.Capacity }}</td>
+                    <td><input type='checkbox' name='tables' class='btn btn-secondary btn-sm' value='{{ record.Table_ID }}' {{record.checked}}></td>
+                </tr>
+            {% endfor %} 
+          {% endif %}
+        </tbody>
+      </table>
+      
+      <div>
+        <button type="submit" class="btn btn-primary">Υποβολή</button> <br>
+    </div>
+</form>
+    </div>
+    {% endblock %}
+  </body>
+</html>

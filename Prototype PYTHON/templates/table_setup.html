@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    {% extends "layout.html" %} {% block content %}
+    <script>
+        $(document).ready(function () {
+            editTable = function (id, capacity) {
+                $("#capacity").val(capacity);
+                $("#table_number").val(id);
+            }
+            createTable = function () {
+                $("#capacity").val("");
+                $("#table_number").val("");
+            }
+        }
+        );
+    </script>
+    <div class="container page">
+        <div class="Login">
+            <h2>Διαμόρφωση τραπεζιών</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Αριθμός τραπεζιού</th>
+                    <th scope="col">Χωρητικότητα</th>
+                    <th scope="col">Ενέργεια</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                {% for record in data %}
+                <tr>
+                    <td>{{ record.Table_ID }}</td>
+                    <td>{{ record.Capacity }}</td>
+                    <td><input type='button' class='btn btn-secondary btn-sm'
+                            onclick='editTable("{{record.Table_ID}}","{{record.Capacity}}")' value='Επεξεργασία'></td>
+                </tr>
+                {% endfor %}
+                {% endif %}<tr>
+                    <td scope="row">
+
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="button" value="Εισαγωγή" onclick='createTable()' class="btn btn-primary btn-sm">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Προσθήκη νέου τραπεζιού</h4>
+        <form action="/table_setup" method="POST">
+            <div class="message">
+                {{ message }}
+            </div>
+            <div class="form-group">
+                <label for="table_number">Αριθμός τραπεζιού</label>
+                <span class="error">*
+                    {% if form.table_number.errors %}
+                    {% for error in form.table_number.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="text" name="table_number" class="form-control" id="table_number" readonly>
+            </div>
+            <div class="form-group">
+                <label for="capacity">Αριθμός ατόμων</label>
+                <span class="error">*
+                    {% if form.capacity.errors %}
+                    {% for error in form.capacity.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="text" name="capacity" class="form-control" id="capacity" placeholder="4">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Υποβολή</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

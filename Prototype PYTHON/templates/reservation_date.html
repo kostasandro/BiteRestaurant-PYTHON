@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+      <div>
+        <h2>Κράτηση</h2>
+      </div>
+      <div
+        class="row justify-content-md-center"
+        style="margin-bottom:20px; margin-top: 20px; "
+      >
+        <div class="col col-2">
+          <img src="../static/images/calendar-alt-regular.svg" />
+        </div>
+      </div>
+      <form method="post" action="/reservation_date">
+        <div class="message">
+          {{ message }}
+        </div>
+        <div class="form-group row">
+          <label for="imerominia" class="col-4 col-form-label"
+            >Ημερομηνία:
+            <span class="error"
+              >* {% if form.imerominia.errors %} {% for error in
+              form.imerominia.errors %} {{ error }} {% endfor %} {% endif %}
+            </span>
+          </label>
+          <div class="col-8">
+            <input
+              type="date"
+              class="form-control"
+              name="imerominia"
+              placeholder="ημερομηνία"
+            />
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Συνέχεια</button> <br />
+        </div>
+      </form>
+    </div>
+    {% endblock %}
+  </body>
+</html>

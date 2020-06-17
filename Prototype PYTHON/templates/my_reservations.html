@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+      <div class="Login">
+        <h2>Οι κρατήσεις μου</h2>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Ημερομηνία</th>
+            <th scope="col">Ώρα</th>
+            <th scope="col">Αριθμός ατόμων</th>
+            <th scope="col">Κατάσταση κράτησης</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if data %} 
+            {% for record in data %} 
+                <tr>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.Start_time }}</td>
+                    <td>{{ record.Persons }}</td>
+                    <td>{% if record.Status==1 %}  Υπό έγκριση 
+                        {% elif record.Status==2 %}  Εγκεκριμένη 
+                        {% else %}  Ακυρωμένη 
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %} 
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+      <div>
+        <h2>Προσθήκη υπαλλήλου</h2>
+      </div>
+      <form method="POST" action="/register_employee">
+        <div class="message">
+          {{ message }}
+        </div>
+        <div class="form-group row">
+          <label for="name" class="col-4 col-form-label">Όνομα 
+            <span class="error"
+              >* {% if form.name.errors %} {% for error in form.name.errors %}
+              {{ error }} {% endfor %} {% endif %}
+            </span>
+          </label>
+          <div class="col-8">
+            <input type="text" name="name" class="form-control" id="name" placeholder="πχ. Κωνσταντίνος" value="{{ form.name.value }}"/>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="surname" class="col-4 col-form-label">Επώνυμο
+            <span class="error">
+              * {% if form.surname.errors %} {% for error in form.surname.errors
+              %} {{ error }} {% endfor %} {% endif %}
+            </span>
+          </label>
+          <div class="col-8">
+            <input
+              type="text" name="surname" class="form-control" id="surname" placeholder="πχ. Ανδρονής" value="{{ form.surname.value }}"/>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="email" class="col-4 col-form-label">E-mail
+            <span class="error">
+              * {% if form.email.errors %} {% for error in form.email.errors %}
+              {{ error }} {% endfor %} {% endif %}
+            </span>
+          </label>
+          <div class="col-8">
+            <input type="text" name="email" class="form-control" id="email" value="{{form.email.value }}" placeholder="πχ. andronis.konst@gmail.com" />
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="password" class="col-4 col-form-label">Κωδικός Πρόσβασης
+            <span class="error">
+              * {% if form.password.errors %} {% for error in
+              form.password.errors %} {{ error }} {% endfor %} {% endif %}
+            </span>
+          </label>
+          <div class="col-8">
+            <input type="password" name="password" class="form-control" id="password" placeholder="πχ. myPass1234"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="cpassword" class="col-4 col-form-label">Επιβεβαίωση Κωδικού Πρόσβασης
+            <span class="error">
+              * {% if form.cpassword.errors %} {% for error in
+              form.cpassword.errors %} {{ error }} {% endfor %} {% endif %}
+            </span>
+          </label>
+          <div class="col-8">
+            <input
+              type="password" name="cpassword" class="form-control" id="cpassword" placeholder="πχ. myPass1234"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="address" class="col-4 col-form-label">Διεύθυνση
+              <span class="error">
+                * {% if form.address.errors %} {% for error in
+                form.address.errors %} {{ error }} {% endfor %} {% endif %}
+              </span>
+            </label>
+            <div class="col-8">
+                <input type="text" name="address" class="form-control" placeholder="πχ. Αριστοτέλους 88">
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="phone_number" class="col-4 col-form-label">Τηλέφωνο
+              <span class="error">
+                * {% if form.phone_number.errors %} {% for error in
+                form.phone_number.errors %} {{ error }} {% endfor %} {% endif %}
+              </span>
+            </label>
+            <div class="col-8">
+                <input type="text" name="phone_number" class="form-control" placeholder="πχ. 999000111">            
+            </div>
+          </div>
+        
+          <div>
+            <button type="submit" class="btn btn-primary">Υποβολή</button> <br>
+        </div>
+      </form>
+    </div>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+        <div class="Login">
+            <h2>Διαχείριση Ημερομηνιών λειτουργίας</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Ημερομηνία από</th>
+                    <th scope="col">Ημερομηνία έως</th>
+                    <th scope="col">Ενέργεια</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                {% for record in data %}
+                <tr>
+                    <th scope="row">{{ record.id }}</th>
+                    <td>{{ record.date_from }}</td>
+                    <td>{{ record.date_to }}</td>
+                    <td>
+                        <a href="{{ url_for('open_date_form_update', id = record.id, date_from=record.date_from, date_to=record.date_to) }}" class="btn btn-secondary  btn-sm">Επεξεργασία</a>
+                        <a href="{{ url_for('open_dates_delete', date_id = record.id) }}" class="btn btn-danger btn-sm">Διαγραφή</a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="{{ url_for('open_date_form_insert') }}" class="btn btn-primary btn-sm">Εισαγωγή</a></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

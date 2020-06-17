@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask app</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="row">
+        <div class="col-sm">
+          <a href="{{ url_for('home') }}" alt="Αρχική">
+            <span class="name">bite</span>
+            <span class="sub">Fine dining</span>
+          </a>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          {% if session['user_first_name'] %}
+          <p>Hello,{% print session['user_first_name'] %}</p>
+          <a href="{{ url_for('logout') }}"> &nbspLog Out</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="container menu">
+      <div class="row">
+        <div class="col menu-item">
+          <a href="{{ url_for('home') }}">Αρχική</a>
+        </div>
+        <div class="col menu-item">
+          <a href="{{ url_for('menu') }}">Το μενού μας</a>
+        </div>
+        <div class="col menu-item">
+          <a href="{{ url_for('reservation_date') }}">Κράτηση</a>
+        </div>
+        <div class="col menu-item">
+          <a href="{{ url_for('about') }}">Σχετικά με εμάς</a>
+        </div>
+        <div class="col menu-item">
+          <a href="{{ url_for('login') }}">Login / Δημιουργία λογαριασμού</a>
+        </div>
+      </div>
+
+      {% if session['user_role'] and session['user_role'] == '01'%}
+      <div class="row secondary-menu">
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('register') }}"
+            >Διαχείριση λογαριασμού</a
+          >
+        </div>
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('my_reservations') }}"
+            >Προβολή προηγούμενων κρατήσεων</a
+          >
+        </div>
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('my_review') }}">Αξιολόγηση Εστιατορίου</a>
+        </div>
+      </div>
+
+      {% endif %} 
+      {% if session['user_role'] and session['user_role'] == '02'%}
+      <div class="row secondary-menu">
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('table_setup') }}">Διαχείριση τραπεζιών</a>
+        </div>
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('open_dates') }}"
+            >Διαχείριση Ημερομηνιών λειτουργίας</a
+          >
+        </div>
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('reservation_management') }}"
+            >Διαχείριση κρατήσεων</a
+          >
+        </div>
+        <div class="col-sm menu-item">
+          <a href="{{ url_for('register_employee') }}">Προσθήκη Υπαλλήλου</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="container">
+      {% block content %} {% endblock %}
+    </div>
+    <div class="footer">
+      <!--toDo, na fernei to year-->
+      <p>Copyright & 2018 - {% print 2019 %} bite.gr</p>
+    </div>
+  </body>
+</html>

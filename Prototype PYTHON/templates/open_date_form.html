@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+        <div>
+            <h2>{{ title }}</h2>
+        </div>
+        <form action="/open_date_form" method="POST">
+            <div class="message">
+                {{ message }}
+            </div>
+            <div class="form-group">
+                <label for="id">Id</label>
+
+                <span class="error">*
+                    {% if form.id.errors %}
+                    {% for error in form.id.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="text" name="id" class="form-control" id="id" readonly value="{{ form.id.value }}">
+            </div>
+            <div class="form-group">
+                <label for="date_from">Ημερομηνία από</label>
+                <span class="error">*
+                    {% if form.date_from.errors %}
+                    {% for error in form.date_from.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="date" name="date_from" class="form-control" id="date_from"
+                    value="{{ form.date_from.value }}">
+
+            </div>
+
+            <div class="form-group">
+                <label for="date_to">Ημερομηνία έως</label>
+                <span class="error">*
+                    {% if form.date_to.errors %}
+                    {% for error in form.date_to.errors %}
+                    {{ error }}
+                    {% endfor %} {% endif %}
+                </span>
+                <input type="date" name="date_to" class="form-control" id="date_to"
+                    value="{{ form.date_to.value }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Υποβολή</button>
+        </form>
+        {% if form.id.value !="" %}
+        <a href="{{ url_for('open_hours', date_id = form.id.value) }}" class="btn btn-primary btn-sm">Επεξεργασία ωρών λειτουργίας</a>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+
+</html>

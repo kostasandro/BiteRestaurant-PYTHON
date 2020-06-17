@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+      <div>
+        <h2>Login</h2>
+      </div>
+      <form action="/login" method="POST">
+        <div class="message">
+			{{ message }} 
+		</div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email</label>
+          <span class="error"
+            >* 
+            {% if form.email.errors %} 
+            {% for error in form.email.errors %}
+            {{ error }}
+            {% endfor %} {% endif %}
+          </span>
+          <input
+            type="text"
+            name="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="πχ. andronis.konst@gmail.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Κωδικός Πρόσβασης</label>
+          <span class="error"
+            >* 
+            {% if form.password.errors %} 
+            {% for error in form.password.errors %}
+            {{ error }}
+            {% endfor %} {% endif %}
+          </span>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="πχ. myPass1234"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Υποβολή</button>
+      </form>
+      <div class="line">
+        Δεν είστε μέλος ακόμα;
+        <a href="{{ url_for('register') }}">Δημιουργία λογαριασμού</a>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

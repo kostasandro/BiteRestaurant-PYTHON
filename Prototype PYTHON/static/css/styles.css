@@ -1,0 +1,96 @@
+
+.clearfix{
+    overflow: auto;
+    clear:both;
+}
+body{
+    background: url("../images/background.jpg") no-repeat center;
+}
+
+h2{
+    margin-bottom: 20px !important;
+    text-align: center;
+}
+
+.page{
+   background: white;
+   border: 2px solid black;
+   padding: 50px !important;
+}
+
+.header,.footer {
+    text-align: center;
+    color: white;
+    /*border:1px solid black;*/
+}
+.header .name{
+    font-size: 95px;
+}
+
+.header .container{
+    background: transparent;
+}
+.header .sub{
+    font-size: 25px;
+    font-style: italic;
+}
+
+.menu-item {
+    text-align: center;
+    background: white;
+    border: 2px solid black !important;
+    margin:5px;
+    min-height: 50px;
+}
+
+.menu{
+    margin: 20px 0 20px 0;
+}
+
+.secondary-menu{
+    font-size: 80%;
+}
+
+.footer{
+    /*text-align: center;
+    border: 2px solid red;
+    clear: both;
+    position: relative;
+    height: 40px;
+    margin-top: -40px;
+    font-size:80%;*/
+
+}
+
+.reservation_box_left{
+    padding: 55px 0 0px 110px;
+}
+.reservation_button_Left{
+    margin: 15 15 0 100;
+}
+
+/*form {
+    margin: 0 auto;
+    width: 40%;
+    border: 1px solid #ced4da;
+    padding: 10px;
+}*/
+
+.inline-element{
+    display:inline;
+}
+
+.line{
+    border-top:1px solid #ced4da;
+    color:#6c757d;
+    padding-top: 5px;
+}
+.error {color: #FF0000; font-size: 80%;}
+
+.message{ 
+    background: #007BBF;
+    color: white;
+    padding: 6px 12px;
+    border: 2px solid black;
+    margin-bottom: 15px;
+}

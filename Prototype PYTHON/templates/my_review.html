@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    {% extends "layout.html" %} {% block content %}
+    <div class="container page">
+      <div>
+        <h2>Αξιολόγηση Εστιατορίου</h2>
+      </div>
+      <form method="post" action="/my_review">
+        <div class="message">
+          {{ message }}
+        </div>
+        <div class="form-group">
+            <label for="comment">Σχόλια</label> 
+            <span class="error"
+            >* 
+            {% if form.comment.errors %} 
+            {% for error in form.comment.errors %}
+            {{ error }}
+            {% endfor %} {% endif %}
+          </span>
+            <textarea class="form-control" rows="4" name="comment"></textarea>            
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Συνέχεια</button> <br />
+        </div>
+      </form>
+    </div>
+    {% endblock %}
+  </body>
+</html>
